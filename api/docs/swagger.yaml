@@ -1,0 +1,49 @@
+definitions:
+  models.Message:
+    properties:
+      chat_id:
+        type: integer
+      priority:
+        type: string
+      text:
+        type: string
+    type: object
+  models.Response:
+    properties:
+      message:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /send:
+    post:
+      consumes:
+      - application/json
+      description: API for sending message
+      parameters:
+      - description: message
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.Message'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Send Message with TGBot
+      tags:
+      - tgbot
+swagger: "2.0"
